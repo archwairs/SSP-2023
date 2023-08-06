@@ -1,0 +1,28 @@
+units lj
+atom_style full
+read_data 'poly_n_full.data'   #replace n with number of monomers
+
+neighbor 0.4 bin
+neigh_modify every 10 one 10000
+bond_style harmonic
+bond_coeff 1 100 1.12
+pair_style lj/cut 2.5
+pair_coeff 1 1 1.0 1.0 1.12
+special_bonds   lj 0 1 1 dihedral no
+
+velocity all create 1.0 1230
+fix 1 all nvt temp 1 1 100
+
+variable kinetic_energy equal ke
+variable potential_energy equal pe
+variable total_energy equal etotal
+variable energy_vdwl equal evdwl
+variable energy_bond equal ebond
+thermo 1000
+dump 1 all custom 100 pos_n_good.dump id type xu yu zu
+
+
+fix myat1 all ave/time 1 1 1 v_energy_vdwl v_energy_bond v_kinetic_energy v_potential_energy v_total_energy file poly_n_good.dat
+
+timestep 0.001
+run 1000000
