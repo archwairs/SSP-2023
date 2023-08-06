@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = np.loadtxt('temp_den_3.dat')
+data = np.loadtxt('') #.dat file containing temperature at each step
 
 print(data[5,1])
 
