@@ -23,11 +23,11 @@ fix		1 all nve
 variable kinetic_energy equal ke
 variable potential_energy equal pe
 variable total_energy equal etotal
-#fix myat1 all ave/time 1 1 1 v_kinetic_energy v_potential_energy v_total_energy file sc_den_0.0001_energy.dat
+fix myat1 all ave/time 1 1 1 v_kinetic_energy v_potential_energy v_total_energy file filename.dat
 
 thermo		10
 compute mytemp all temp
-fix tempy all ave/time 1 1 1 c_mytemp file temp_den_3.dat
-#dump mydumpinitial all xyz 10 sc_den_0.0001.xyz
+fix tempy all ave/time 1 1 1 c_mytemp file filename.dat
+dump mydumpinitial all xyz 10 filename.xyz
 
 run 100000
